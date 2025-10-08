@@ -13,12 +13,15 @@
 
                             <x-nav-link href="/home" :active="request()->is('home')">Home</x-nav-link>
                             <x-nav-link href="/student" :active="request()->is('student')">Student</x-nav-link>
+                            <x-nav-link href="/teacher" :active="request()->is('teacher')">Teacher</x-nav-link>
+                            <x-nav-link href="/mapel" :active="request()->is('mapel')">Mapel</x-nav-link>
                             <x-nav-link href="/guardian" :active="request()->is('guardian')">Guardian</x-nav-link>
                             <x-nav-link href="/classroom" :active="request()->is('classroom')">Classroom</x-nav-link>
                             <x-nav-link href="/profil" :active="request()->is('profil')">Profile</x-nav-link>
                             <x-nav-link href="/kontak" :active="request()->is('kontak')">Contact</x-nav-link>
 
 
+Z
                         </div>
                     </div>
                 </div>

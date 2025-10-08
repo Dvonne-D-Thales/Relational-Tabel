@@ -9,4 +9,5 @@ class Guardian extends Model
 {
     /** @use HasFactory<\Database\Factories\GuardianFactory> */
     use HasFactory;
+
 }

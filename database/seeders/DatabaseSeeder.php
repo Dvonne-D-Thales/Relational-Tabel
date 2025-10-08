@@ -2,35 +2,30 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Student;
+use Illuminate\Database\Seeder;
 use App\Models\Guardian;
 use App\Models\Classroom;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\Student;
+use App\Models\Mapel;
+use App\Models\Teacher;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
         $this->call([
             GuardianSeeder::class,
             ClassroomSeeder::class,
-            StudentsSeeder::class, // ← tambahkan ini
+            StudentsSeeder::class,
         ]);
 
+        // Buat 5 mapel, dan untuk setiap mapel buat 1 guru
+        $mapels = Mapel::factory(5)->create();
 
-
-
+        $mapels->each(function ($mapel) {
+            Teacher::factory()->create([
+                'id_mapel' => $mapel->id,
+            ]);
+        });
     }
 }

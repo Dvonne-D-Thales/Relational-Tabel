@@ -16,14 +16,14 @@ class StudentsFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-{
-    return [
-        'name' => $this->faker->name(),
-        'id_classroom' => Classroom::inRandomOrder()->first()->id,
-        'birthdate' => $this->faker->dateTimeBetween('2005-01-01', '2008-12-31')->format('Y-m-d'),
-        'email' => $this->faker->unique()->safeEmail(),
-        'address' => $this->faker->address(),
-    ];
-}
+    {
+        return [
+            'name' => $this->faker->name(),
+            'id_classroom' => Classroom::inRandomOrder()->first()->id,
+            'birthdate' => $this->faker->dateTimeBetween('2005-01-01', '2008-12-31')->format('Y-m-d'),
+            'email' => $this->faker->unique()->safeEmail(),
+            'address' => $this->faker->address(),
+        ];
+    }
 
 }
