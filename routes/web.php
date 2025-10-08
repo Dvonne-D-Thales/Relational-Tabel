@@ -8,7 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\ClassroomController;
 
-Route::get('/', [ProfilController::class, 'index']);
+Route::get('/', [StudentController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/profil', [ProfilController::class, 'index']);
 Route::get('/kontak', [ContactController::class, 'kontak']);

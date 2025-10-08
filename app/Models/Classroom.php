@@ -1,5 +1,7 @@
 <?php
 namespace App\Models;
+// /php artisan make:model Product -mfs
+//php artisan make:controller GuardianController --resource --model=Guardian
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

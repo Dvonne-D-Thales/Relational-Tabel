@@ -156,7 +156,6 @@
                 </table>
             </div>
         </div>
-
         <script>
             function createStar() {
                 const star = document.createElement("div");
