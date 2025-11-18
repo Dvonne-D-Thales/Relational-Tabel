@@ -1,0 +1,11 @@
+@keyframes galaxy {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-galaxy {
+  background-image: url('https://i.ibb.co/fx4VJdG/galaxy-stars.jpg'); /* ganti sesuai keinginan */
+  background-size: cover;
+  background-repeat: repeat-x;
+  animation: galaxy 60s linear infinite;
+}

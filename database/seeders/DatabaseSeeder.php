@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Buat 5 mapel, dan untuk setiap mapel buat 1 guru
-        $mapels = Mapel::factory(5)->create();
+        $mapels = Mapel::factory(18)->create();
 
         $mapels->each(function ($mapel) {
             Teacher::factory()->create([

@@ -13,7 +13,7 @@ class ClassroomSeeder extends Seeder
      */
     public function run(): void
     {
-        Classroom::factory(6)->has(
+        Classroom::factory(5)->has(
             \App\Models\Students::factory()->count(5),
             'students'
         )->create();

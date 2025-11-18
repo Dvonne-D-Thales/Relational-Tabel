@@ -88,10 +88,8 @@
             width: 2px;
             height: 80px;
             background: linear-gradient(to top right, white, transparent);
-            /* ekor kanan atas */
             opacity: 0.8;
             transform: rotate(45deg);
-            /* arah diagonal */
             animation: fall 3s linear forwards;
             z-index: 1;
         }
@@ -109,9 +107,7 @@
         }
 
         @media (max-width: 640px) {
-
-            th,
-            td {
+            th, td {
                 padding: 10px;
                 font-size: 13px;
             }
@@ -122,9 +118,7 @@
         }
     </style>
 
-
     <body>
-        <!-- Layer bintang -->
         <div id="stars"></div>
 
         <div class="container">
@@ -140,15 +134,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($classroom as $index => $g)
+                        @foreach ($classrooms as $index => $g)
                             <tr>
                                 <td class="no">{{ $index + 1 }}</td>
                                 <td>{{ $g->name }}</td>
-                                <td>{{ $g->created_at }}</td>
+                                <td>{{ $g->created_at->format('d M Y') }}</td>
                                 <td>
-                                    @foreach ($g->students as $student)
-                                        {{ $student->name }} <br>
-                                    @endforeach
+                                    @if ($g->students->count() > 0)
+                                        @foreach ($g->students as $student)
+                                            {{ $student->name }}<br>
+                                        @endforeach
+                                    @else
+                                        <span style="color: #a0aec0;">Tidak ada murid</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -156,23 +154,19 @@
                 </table>
             </div>
         </div>
+
         <script>
             function createStar() {
                 const star = document.createElement("div");
                 star.classList.add("star");
-
-                const fromTop = Math.random() < 0.5; // 50% dari atas, 50% dari kanan
-
+                const fromTop = Math.random() < 0.5;
                 if (fromTop) {
-                    // Muncul dari atas
                     star.style.top = Math.random() * window.innerHeight * 0.3 + "px";
                     star.style.left = Math.random() * window.innerWidth + "px";
                 } else {
-                    // Muncul dari kanan
                     star.style.top = Math.random() * window.innerHeight + "px";
                     star.style.left = window.innerWidth - 10 + "px";
                 }
-
                 star.style.animationDuration = (1.5 + Math.random() * 2.5) + "s";
                 document.getElementById("stars").appendChild(star);
                 setTimeout(() => star.remove(), 4000);

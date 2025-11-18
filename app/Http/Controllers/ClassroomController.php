@@ -12,10 +12,12 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        $classroom = Classroom::all();
+       // Ambil semua classroom dengan relasi students
+        $classrooms = Classroom::with('students')->get();
+
         return view('classroom', [
             'title' => 'Classroom',
-            'classroom' => $classroom
+            'classroom' => $classrooms
         ]);
     }
 

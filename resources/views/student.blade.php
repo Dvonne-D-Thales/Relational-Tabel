@@ -138,6 +138,7 @@
                             <th class="no">NO</th>
                             <th>Nama</th>
                             <th>Kelas</th>
+                            <th>Tanggal Lahir</th>
                             <th>Email</th>
                             <th>Alamat</th>
                         </tr>
@@ -145,11 +146,12 @@
                     <tbody>
                         @foreach ($students as $index => $s)
                             <tr>
-                                <td class="no">{{ $index + 1 }}</td>
-                                <td>{{ $s['name'] }}</td>
-                                <td>{{ $s->classroom->name }}</td>
-                                <td>{{ $s['email'] }}</td>
-                                <td>{{ $s['address'] }}</td>
+                                <td class="px-4 py-2">{{ $index + 1 }}</td>
+                                <td class="px-4 py-2">{{ $s->name }}</td>
+                                <td class="px-4 py-2">{{ $s->classroom->name ?? '-' }}</td>
+                                <td class="px-4 py-2">{{ $s->birthdate }}</td>
+                                <td class="px-4 py-2">{{ $s->email }}</td>
+                                <td class="px-4 py-2">{{ $s->address }}</td>
                             </tr>
                         @endforeach
                     </tbody>

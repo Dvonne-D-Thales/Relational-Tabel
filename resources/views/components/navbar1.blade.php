@@ -21,7 +21,7 @@
                             <x-nav-link href="/kontak" :active="request()->is('kontak')">Contact</x-nav-link>
 
 
-Z
+
                         </div>
                     </div>
                 </div>

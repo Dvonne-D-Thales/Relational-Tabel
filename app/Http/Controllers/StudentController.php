@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function index()
 {
 
-    $students = students::all();
+    $students = students::with('classroom')->get();
 
 
     return view('student', [

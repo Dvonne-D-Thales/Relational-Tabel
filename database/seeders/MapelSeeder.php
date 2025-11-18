@@ -13,7 +13,7 @@ class MapelSeeder extends Seeder
      */
     public function run(): void
     {
-        mapel::factory(6)->has(
+        mapel::factory(18)->has(
             \App\Models\teacher::factory()->count(5),
             'teacher'
         )->create();

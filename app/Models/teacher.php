@@ -12,9 +12,9 @@ class Teacher extends Model
     protected $table = 'teachers';
     protected $fillable = ['name', 'id_mapel', 'phone', 'email', 'address'];
 
+    // ✅ relasi ke tabel mapel
     public function mapel()
-{
-    return $this->belongsTo(Mapel::class, 'id_mapel', );
-}
-
+    {
+        return $this->belongsTo(Mapel::class, 'id_mapel', 'id');
+    }
 }
