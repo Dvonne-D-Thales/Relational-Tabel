@@ -12,13 +12,10 @@
 </head>
 <body class="antialiased bg-gray-50 dark:bg-gray-900">
 
-    <!-- Navbar -->
     <x-admin.navbar />
 
-    <!-- Sidebar -->
     <x-admin.sidebar />
 
-    <!-- Konten utama -->
     <main class="p-4 md:ml-64 h-auto pt-20">
         {{ $slot }}
     </main>

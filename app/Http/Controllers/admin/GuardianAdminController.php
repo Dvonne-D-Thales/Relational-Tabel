@@ -31,10 +31,14 @@ class GuardianAdminController extends Controller
         return redirect()->route('admin.guardians');
     }
 
-    public function update(Request $request, $id)
+    public function edit($id)
     {
         $guardian = Guardian::findOrFail($id);
+        return view('admin.update.guardian_edit', compact('guardian'));
+    }
 
+    public function update(Request $request, Guardian $guardian)
+    {
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'job' => 'required|string|max:100',
@@ -44,13 +48,12 @@ class GuardianAdminController extends Controller
         ]);
 
         $guardian->update($validated);
-        return redirect()->route('admin.guardians.index');
+        return redirect()->route('admin.guardians.index')->with('success', 'Data wali berhasil diupdate');
     }
 
-    public function destroy($id)
+    public function destroy(Guardian $guardian)
     {
-        $guardian = Guardian::findOrFail($id);
         $guardian->delete();
-        return redirect()->route('admin.guardians.index');
+        return redirect()->route('admin.guardians.index')->with('success', 'Data wali berhasil dihapus');
     }
 }

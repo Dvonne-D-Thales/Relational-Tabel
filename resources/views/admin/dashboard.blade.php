@@ -1,289 +1,127 @@
 <x-admin.layout>
 
+    {{-- Sembunyikan elemen yang pakai x-cloak --}}
     <style>
-        :root {
-            --primary: #7c3aed;
-            --primary-light: #2d1b69;
-            --text-dark: #e2e8f0;
-            --text-light: #a0aec0;
-            --bg: #0f172a;
-            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 28px;
-            font-weight: 700;
-            text-align: left;
-            color: var(--primary);
-        }
-
-        /* Cards */
-        .card {
-            background: #1e293b;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            overflow: hidden;
-            border: 1px solid #334155;
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.4);
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
-        }
-
-        thead {
-            background: var(--primary-light);
-        }
-
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-        }
-
-        th {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 14px;
-            letter-spacing: .5px;
-        }
-
-        tbody tr {
-            transition: background 0.2s ease, transform 0.15s ease;
-        }
-
-        tbody tr:hover {
-            background: rgba(124, 58, 237, 0.1);
-            transform: scale(1.01);
-        }
-
-        .no {
-            width: 60px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        /* Galaksi canvas */
-        #dashboardGalaxy {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        @media (max-width: 640px) {
-            th, td {
-                padding: 10px;
-                font-size: 13px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-        }
+        [x-cloak] { display: none !important; }
     </style>
 
-    <body>
+    <section class="bg-gray-50 dark:bg-gray-900 p-4 sm:p-6">
+        <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
 
-        {{-- Galaksi Background --}}
-        <canvas id="dashboardGalaxy"></canvas>
+            <div class="bg-white dark:bg-gray-800 shadow-md sm:rounded-lg p-6">
 
-        <div class="container">
-            <h1>Dashboard</h1>
+                {{-- Judul Dashboard --}}
+                <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
+                    Dashboard
+                </h1>
 
-            {{-- Statistik Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card">Jumlah Siswa<br><strong>128</strong></div>
-                <div class="card">Jumlah Guru<br><strong>24</strong></div>
-                <div class="card">Jumlah Kelas<br><strong>12</strong></div>
-                <div class="card">Jumlah Mapel<br><strong>8</strong></div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                {{-- Tabel Aktivitas Kiri --}}
-              <div class="card">
-                <h2>Aktivitas Terbaru</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="no">1</td>
-                            <td>🧑‍🎓 Siswa baru ditambahkan: <strong>Andi Setiawan</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="no">2</td>
-                            <td>📚 Guru baru bergabung: <strong>Ibu Lestari</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="no">3</td>
-                            <td>🏫 Kelas 8A diperbarui</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                {{-- CARD STATISTIK --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 border dark:border-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">Jumlah Siswa</p>
+                        <h3 class="text-xl font-bold text-blue-600">128</h3>
+                    </div>
 
-            {{-- Grafik Kanan --}}
-            <div class="card chart-placeholder">
-                Grafik
-            </div>
-        </div>
-    </div>
+                    <div class="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 border dark:border-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">Jumlah Guru</p>
+                        <h3 class="text-xl font-bold text-blue-600">24</h3>
+                    </div>
 
+                    <div class="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 border dark:border-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">Jumlah Kelas</p>
+                        <h3 class="text-xl font-bold text-blue-600">12</h3>
+                    </div>
 
-            {{-- Jadwal Pelajaran --}}
-            <div class="mt-8">
+                    <div class="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 border dark:border-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">Jumlah Mapel</p>
+                        <h3 class="text-xl font-bold text-blue-600">8</h3>
+                    </div>
+                </div>
+
+                {{-- GRID 2 KOLOM --}}
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+
+                    {{-- Tabel Aktivitas Terbaru --}}
+                    <div class="bg-gray-100 dark:bg-gray-700 p-5 rounded-lg shadow border dark:border-gray-600">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Aktivitas Terbaru</h2>
+
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300">
+                                <tr>
+                                    <th class="px-4 py-2">No</th>
+                                    <th class="px-4 py-2">Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-300 text-white-500  dark:divide-gray-600">
+                                <tr class="hover:bg-gray-200 dark:hover:bg-gray-600">
+                                    <td class="px-4 py-2">1</td>
+                                    <td class="px-4 py-2 ">🧑‍🎓 Siswa baru ditambahkan: <strong>Andi Setiawan</strong></td>
+                                </tr>
+                                <tr class="hover:bg-gray-200 dark:hover:bg-gray-600">
+                                    <td class="px-4 py-2">2</td>
+                                    <td class="px-4 py-2">📚 Guru baru bergabung: <strong>Ibu Lestari</strong></td>
+                                </tr>
+                                <tr class="hover:bg-gray-200 dark:hover:bg-gray-600 ">
+                                    <td class="px-4 py-2">3</td>
+                                    <td class="px-4 py-2">🏫 Kelas 8A diperbarui</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- Placeholder Grafik --}}
+                    <div class="bg-gray-100 dark:bg-gray-700 p-5 rounded-lg shadow border dark:border-gray-600 flex items-center justify-center">
+                        <span class="text-gray-500 dark:text-gray-300">Grafik</span>
+                    </div>
+
+                </div>
+
+                {{-- Jadwal Pelajaran --}}
                 @php
-                    $mapel = ['Matematika', 'Bahasa Inggris', 'Game Dev', 'IPA', 'IPS', 'Web Dev'];
-                    $guru = ['Bu Siti', 'Pak Rudi', 'Pak Andi', 'Bu Nia', 'Bu Wati', 'Pak Budi'];
+                    $mapel = ['Matematika','Bahasa Inggris','Game Dev','IPA','IPS','Web Dev'];
+                    $guru = ['Bu Siti','Pak Rudi','Pak Andi','Bu Nia','Bu Wati','Pak Budi'];
                     $durasi = 90*60;
                     $mulai = strtotime('07:00');
                     $hariList = ['Senin'=>5,'Selasa'=>6,'Rabu'=>5,'Kamis'=>5,'Jumat'=>2,'Sabtu'=>4];
                 @endphp
 
-                @foreach ($hariList as $hari => $jumlahPelajaran)
-                    <div class="card mt-4">
-                        <h2>Jadwal Hari {{ $hari }}</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="no">No</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Guru Pengampu</th>
-                                    <th>Waktu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $jam=$mulai; @endphp
-                                @for ($i=0; $i<$jumlahPelajaran; $i++)
-                                    @php
-                                        $jam_selesai = $jam+$durasi;
-                                        $waktu = date('H:i',$jam).' - '.date('H:i',$jam_selesai);
-                                        $jam = $jam_selesai;
-                                    @endphp
+                <div class="mt-8 space-y-6">
+                    @foreach ($hariList as $hari => $jumlahPelajaran)
+                        <div class="bg-white dark:bg-gray-800 shadow border dark:border-gray-700 rounded-lg p-5">
+                            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Jadwal Hari {{ $hari }}</h2>
+
+                            <table class="w-full text-sm text-left text-white-500 dark:text-gray-400">
+                                <thead class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                                     <tr>
-                                        <td class="no">{{ $i+1 }}</td>
-                                        <td>{{ $mapel[$i % count($mapel)] }}</td>
-                                        <td>{{ $guru[$i % count($guru)] }}</td>
-                                        <td>{{ $waktu }}</td>
+                                        <th class="px-4 py-2">No</th>
+                                        <th class="px-4 py-2">Mata Pelajaran</th>
+                                        <th class="px-4 py-2">Guru Pengampu</th>
+                                        <th class="px-4 py-2">Waktu</th>
                                     </tr>
-                                @endfor
-                            </tbody>
-                        </table>
-                    </div>
-                @endforeach
+                                </thead>
+                                <tbody class="divide-y divide-gray-300 dark:divide-gray-600">
+                                    @php $jam = $mulai; @endphp
+                                    @for ($i = 0; $i < $jumlahPelajaran; $i++)
+                                        @php
+                                            $jam_selesai = $jam + $durasi;
+                                            $waktu = date('H:i', $jam) . ' - ' . date('H:i', $jam_selesai);
+                                            $jam = $jam_selesai;
+                                        @endphp
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <td class="px-4 py-2">{{ $i+1 }}</td>
+                                            <td class="px-4 py-2">{{ $mapel[$i % count($mapel)] }}</td>
+                                            <td class="px-4 py-2">{{ $guru[$i % count($guru)] }}</td>
+                                            <td class="px-4 py-2">{{ $waktu }}</td>
+                                        </tr>
+                                    @endfor
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
+    </section>
 
-        {{-- JS Galaksi --}}
-        <script>
-            const canvas = document.getElementById('dashboardGalaxy');
-            const ctx = canvas.getContext('2d');
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            // Stars
-            const stars=[];
-            const STAR_COUNT=150;
-            for(let i=0;i<STAR_COUNT;i++){
-                stars.push({
-                    x:Math.random()*canvas.width,
-                    y:Math.random()*canvas.height,
-                    radius:Math.random()*1.5,
-                    color:['#fff','#aabfff','#d1c4ff'][Math.floor(Math.random()*3)],
-                    speed:Math.random()*0.3+0.05
-                });
-            }
-
-            // Shooting stars
-            const shootingStars=[];
-            function addShootingStar() {
-                shootingStars.push({
-                    x:Math.random()*canvas.width,
-                    y:Math.random()*canvas.height*0.3,
-                    len: Math.random()*150+50,
-                    speed: Math.random()*6+4,
-                    angle: Math.random()*Math.PI/3 - Math.PI/6
-                });
-            }
-            setInterval(addShootingStar,3000);
-
-            function animate(){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-
-                // Stars
-                stars.forEach(s=>{
-                    ctx.beginPath();
-                    ctx.arc(s.x,s.y,s.radius,0,Math.PI*2);
-                    ctx.fillStyle=s.color;
-                    ctx.fill();
-                    s.x -= s.speed;
-                    if(s.x<0) s.x=canvas.width;
-                });
-
-                // Shooting stars
-                for(let i=shootingStars.length-1;i>=0;i--){
-                    const s=shootingStars[i];
-                    const x2 = s.x - s.len*Math.cos(s.angle);
-                    const y2 = s.y - s.len*Math.sin(s.angle);
-                    const gradient = ctx.createLinearGradient(s.x,s.y,x2,y2);
-                    gradient.addColorStop(0,'rgba(255,255,255,1)');
-                    gradient.addColorStop(1,'rgba(255,255,255,0)');
-                    ctx.strokeStyle = gradient;
-                    ctx.lineWidth=2;
-                    ctx.beginPath();
-                    ctx.moveTo(s.x,s.y);
-                    ctx.lineTo(x2,y2);
-                    ctx.stroke();
-
-                    s.x -= s.speed*Math.cos(s.angle);
-                    s.y -= s.speed*Math.sin(s.angle);
-
-                    if(s.x<0 || s.y>canvas.height) shootingStars.splice(i,1);
-                }
-
-                requestAnimationFrame(animate);
-            }
-            animate();
-        </script>
-
-    </body>
 </x-admin.layout>

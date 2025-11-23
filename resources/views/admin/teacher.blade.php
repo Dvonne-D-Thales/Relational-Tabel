@@ -1,6 +1,8 @@
 <x-admin.layout>
     <style>
-        [x-cloak] { display: none !important; }
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -11,29 +13,21 @@
                     {{-- ✅ Header --}}
                     <div class="flex justify-between items-center p-4">
                         <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Daftar Guru</h1>
-                        <button
-                            @click="openAddModal = true"
+                        <button @click="openAddModal = true"
                             class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm px-4 py-2">
                             + Tambah Guru
                         </button>
                     </div>
 
                     {{-- ✅ Modal Tambah Guru --}}
-                    <div
-                        x-show="openAddModal"
-                        x-cloak
-                        x-transition.opacity.duration.300ms
-                        class="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-                    >
-                        <div
-                            x-show="openAddModal"
-                            x-transition.scale.origin.center.duration.300ms
+                    <div x-show="openAddModal" x-cloak x-transition.opacity.duration.300ms
+                        class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                        <div x-show="openAddModal" x-transition.scale.origin.center.duration.300ms
                             @click.away="
                                 openAddModal = false;
                                 $refs.teacherForm.reset();
                             "
-                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg w-full max-w-2xl p-6 relative"
-                        >
+                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
                             <button
                                 @click="
                                     openAddModal = false;
@@ -58,7 +52,8 @@
                     {{-- ✅ Tabel Guru --}}
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th class="px-4 py-3">#</th>
                                     <th class="px-4 py-3">Nama</th>
@@ -79,21 +74,22 @@
                                         <td class="px-4 py-3">{{ $teacher->phone ?? '-' }}</td>
                                         <td class="px-4 py-3">{{ $teacher->address ?? '-' }}</td>
                                         <td class="px-4 py-3">
-                                             <a
+                                            <a href="{{ route('admin.teachers.edit', $teacher->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 font-medium">Edit</a>
-                                            <form
-                                                action="{{ route('admin.teachers.destroy', $teacher->id) }}"
+                                            <form action="{{ route('admin.teachers.destroy', $teacher->id) }}"
                                                 method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus guru ini?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="text-red-600 hover:text-red-800 font-medium">Hapus</button>
+                                                <button
+                                                    class="text-red-600 hover:text-red-800 font-medium">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center py-4 text-gray-400">Belum ada data guru.</td>
+                                        <td colspan="7" class="text-center py-4 text-gray-400">Belum ada data guru.
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\MapelAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
@@ -24,18 +25,13 @@ Route::get('/classroom', [ClassroomController::class, 'index']);
 Route::get('/teacher', [TeacherController::class, 'index']);
 Route::get('/mapel', [MapelController::class, 'index']);
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/guardianadmin', [GuardianAdminController::class, 'index']);
-Route::get('/Studentadmin', [StudentAdminController::class, 'index']);
-Route::get('/teacheradmin', [TeacherAdminController::class, 'index']);
-Route::get('/classroomadmin', [ClassroomAdminController::class, 'index']);
+Route::get('/admin', fn() => view('admin.dashboard'));
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('students', StudentAdminController::class);
     Route::resource('guardians', GuardianAdminController::class);
     Route::resource('teachers', TeacherAdminController::class);
     Route::resource('classrooms', ClassroomAdminController::class);
+    Route::resource('mapel', MapelAdminController::class);
 });
+

@@ -1,4 +1,4 @@
-<form id="guardianForm" action="{{ route('admin.guardians.store') }}" method="POST" class="space-y-4">
+<form id="classroomForm" action="{{ route('admin.classrooms.store') }}" method="POST" class="space-y-4">
     @csrf
     <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Tambah Kelas Baru</h2>
 
