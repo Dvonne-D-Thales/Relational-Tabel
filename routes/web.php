@@ -25,7 +25,7 @@ Route::get('/classroom', [ClassroomController::class, 'index']);
 Route::get('/teacher', [TeacherController::class, 'index']);
 Route::get('/mapel', [MapelController::class, 'index']);
 
-Route::get('/admin', fn() => view('admin.dashboard'));
+Route::get('/admin', action: fn() => view('admin.dashboard'));
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('students', StudentAdminController::class);

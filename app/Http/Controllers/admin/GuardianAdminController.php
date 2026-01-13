@@ -8,11 +8,20 @@ use App\Models\Guardian;
 
 class GuardianAdminController extends Controller
 {
-    public function index()
-    {
-        $guardians = Guardian::paginate(10);
-        return view('admin.guardian', compact('guardians'));
-    }
+   public function index(Request $request)
+{
+    $search = $request->search;
+
+    $guardians = Guardian::when($search, function ($query, $search) {
+            $query->where('name', 'like', $search.'%');
+        })
+        ->orderBy('name')
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('admin.guardian', compact('guardians'));
+}
+
 
     public function store(Request $request)
     {
@@ -48,12 +57,12 @@ class GuardianAdminController extends Controller
         ]);
 
         $guardian->update($validated);
-        return redirect()->route('admin.guardians.index')->with('success', 'Data wali berhasil diupdate');
+        return redirect()->route('admin.guardians.index');
     }
 
     public function destroy(Guardian $guardian)
     {
         $guardian->delete();
-        return redirect()->route('admin.guardians.index')->with('success', 'Data wali berhasil dihapus');
+        return redirect()->route('admin.guardians.index');
     }
 }

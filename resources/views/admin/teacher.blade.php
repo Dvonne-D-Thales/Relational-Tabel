@@ -42,13 +42,6 @@
                         </div>
                     </div>
 
-                    {{-- ✅ Alert Sukses --}}
-                    @if (session('success'))
-                        <div class="m-4 p-3 bg-green-100 text-green-800 rounded-lg">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
                     {{-- ✅ Tabel Guru --}}
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

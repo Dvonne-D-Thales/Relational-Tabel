@@ -11,9 +11,18 @@ class ClassroomAdminController extends Controller
     /**
      * Tampilkan daftar kelas.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $classrooms = Classroom::withCount('students')->paginate(10);
+         $search = $request->search;
+
+        $classrooms = Classroom::with('students')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', $search . '%');
+            })
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.classroom', [
             'title' => 'Classroom',
             'classrooms' => $classrooms
@@ -23,18 +32,23 @@ class ClassroomAdminController extends Controller
     /**
      * Simpan data kelas baru.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:classrooms,name',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
 
-        Classroom::create([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->back()->with('success', 'Kelas berhasil ditambahkan!');
+    // cek apakah nama sudah ada
+    if (Classroom::where('name', $request->name)->exists()) {
+        return redirect()->back();
     }
+
+    Classroom::create([
+        'name' => $request->name,
+    ]);
+
+    return redirect()->back();
+}
 
     /**
      * Tampilkan form edit.
@@ -48,26 +62,21 @@ class ClassroomAdminController extends Controller
 public function update(Request $request, $id)
 {
     $request->validate([
-        'name' => 'required|max:255'
+        'name' => 'required|string|max:255',
     ]);
 
-    $classroom = Classroom::findOrFail($id);
+    if (Classroom::where('name', $request->name)
+                 ->where('id', '!=', $id)
+                 ->exists()) {
+        return redirect()->back();
+    }
 
+    $classroom = Classroom::findOrFail($id);
     $classroom->update([
         'name' => $request->name,
     ]);
 
-    return redirect()->route('admin.classrooms.index')
-                     ->with('success', 'Kelas berhasil diperbarui!');
+    return redirect()->route('admin.classrooms.index');
 }
 
-
-    /**
-     * Hapus kelas.
-     */
-    public function destroy($id)
-    {
-        Classroom::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Kelas berhasil dihapus!');
-    }
 }

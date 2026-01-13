@@ -1,4 +1,4 @@
-<form action="{{ route('admin.students.store') }}" method="POST" class="space-y-4">
+<form x-ref="formAddStudent" action="{{ route('admin.students.store') }}" method="POST" class="space-y-4">
     @csrf
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div>
@@ -23,13 +23,12 @@
                 class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Kelas</label>
             <select id="classroom_id" name="classroom_id"
                 class="border border-gray-300 dark:border-gray-600 text-sm rounded-lg w-full p-2.5
-                       bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+               bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 required>
-                <option value="">-- Pilih Kelas --</option>
+                <option value="" disabled selected>Pilih kelas</option>
                 @foreach ($classrooms as $classroom)
                     <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
                 @endforeach
-
             </select>
         </div>
 

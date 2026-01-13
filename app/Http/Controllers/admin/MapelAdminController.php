@@ -8,11 +8,21 @@ use Illuminate\Http\Request;
 
 class MapelAdminController extends Controller
 {
-  public function index()
+ public function index(Request $request)
 {
-    $mapel = Mapel::paginate(10);
+    $search = $request->search;
+
+    $mapel = Mapel::with('teacher')
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'like', $search.'%');
+        })
+        ->orderBy('name')
+        ->paginate(10)
+        ->withQueryString();
+
     return view('admin.mapel', compact('mapel'));
 }
+
 
 
     public function create()
@@ -29,7 +39,7 @@ class MapelAdminController extends Controller
         ]);
 
         Mapel::create($request->all());
-        return redirect()->route('admin.mapel.index')->with('success', 'Mapel berhasil ditambahkan.');
+        return redirect()->route('admin.mapel.index');
     }
 
     public function edit(Mapel $mapel)
@@ -48,9 +58,4 @@ class MapelAdminController extends Controller
         return redirect()->route('admin.mapel.index')->with('success', 'Mapel berhasil diperbarui.');
     }
 
-    public function destroy(Mapel $mapel)
-    {
-        $mapel->delete();
-        return redirect()->route('admin.mapel.index')->with('success', 'Mapel berhasil dihapus.');
-    }
 }

@@ -68,8 +68,6 @@
                                             <form action="{{ route('admin.mapel.destroy', $m->id) }}" method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus mapel ini?')">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button class="text-red-500 hover:text-red-700 font-medium">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -84,7 +82,7 @@
 
                     {{-- ✅ Pagination --}}
                     <div class="p-4">
-                        {{ $mapel->links() }}
+                        {{ $mapel->links();}}
                     </div>
                 </div>
             </div>

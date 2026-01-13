@@ -9,9 +9,18 @@ use App\Models\Classroom;
 
 class StudentAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = Students::with('classroom')->paginate(10);
+        $search = $request->search;
+
+        $students = Students::with('classroom')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', $search.'%');
+            })
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
+
         $classrooms = Classroom::orderBy('name')->get();
 
         return view('admin.student', compact('students', 'classrooms'));
@@ -20,19 +29,19 @@ class StudentAdminController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'         => 'required|string|max:100',
-            'email'        => 'required|email|unique:students,email',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:students,email',
             'classroom_id' => 'required|exists:classrooms,id',
-            'address'      => 'required|string|max:255',
-            'birthday'     => 'required|date',
+            'address' => 'required|string|max:255',
+            'birthday' => 'required|date',
         ]);
 
         Students::create([
-            'name'         => $validated['name'],
-            'email'        => $validated['email'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'classroom_id' => $validated['classroom_id'],
-            'birthdate'    => $validated['birthday'], // ⬅ birthday ditambahkan
-            'address'      => $validated['address'],
+            'birthdate' => $validated['birthday'],
+            'address' => $validated['address'],
         ]);
 
         return redirect()->route('admin.students.index');
@@ -51,19 +60,19 @@ class StudentAdminController extends Controller
         $student = Students::findOrFail($id);
 
         $validated = $request->validate([
-            'name'         => 'required|string|max:100',
-            'email'        => 'required|email|unique:students,email,' . $student->id,
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:students,email,' . $student->id,
             'classroom_id' => 'required|exists:classrooms,id',
-            'address'      => 'required|string|max:255',
-            'birthday'     => 'required|date',
+            'address' => 'required|string|max:255',
+            'birthday' => 'required|date',
         ]);
 
         $student->update([
-            'name'         => $validated['name'],
-            'email'        => $validated['email'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'classroom_id' => $validated['classroom_id'],
-            'birthdate'    => $validated['birthday'], // ⬅ birthday ditambahkan
-            'address'      => $validated['address'],
+            'birthdate' => $validated['birthday'],
+            'address' => $validated['address'],
         ]);
 
         return redirect()->route('admin.students.index');

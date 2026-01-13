@@ -1,6 +1,5 @@
 <x-admin.layout>
 
-    {{-- Sembunyikan elemen yang pakai x-cloak sebelum Alpine aktif --}}
     <style>
         [x-cloak] {
             display: none !important;

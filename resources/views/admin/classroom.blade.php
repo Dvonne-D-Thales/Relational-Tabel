@@ -11,10 +11,7 @@
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
-                {{-- ✅ Inisialisasi Alpine --}}
                 <div x-data="{ openAddModal: false }">
-
-                    {{-- ✅ Header --}}
                     <div class="flex justify-between items-center p-4">
                         <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Daftar Kelas</h1>
                         <button @click="openAddModal = true"
@@ -61,16 +58,12 @@
                                         <td class="px-4 py-2">{{ $c->name }}</td>
                                         <td class="px-4 py-2">{{ $c->students_count }}</td>
                                         <td class="px-4 py-2 flex gap-2">
-
                                             <a href="{{ route('admin.classrooms.edit', $c->id) }}"
                                                 class="text-blue-300 hover:text-blue-400 font-medium">Edit</a>
                                             <form action="{{ route('admin.classrooms.destroy', $c->id) }}"
                                                 method="POST" class="inline">
+                                                {{-- Cross-Site Request Forgery --}}
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-red-400 hover:text-red-500 font-medium"
-                                                    onclick="return confirm('Yakin ingin menghapus kelas ini?')">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
