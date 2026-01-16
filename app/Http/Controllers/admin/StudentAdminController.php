@@ -15,11 +15,15 @@ class StudentAdminController extends Controller
 
         $students = Students::with('classroom')
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', $search.'%');
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhereHas('classroom', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%');
+                    });
             })
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
+
 
         $classrooms = Classroom::orderBy('name')->get();
 

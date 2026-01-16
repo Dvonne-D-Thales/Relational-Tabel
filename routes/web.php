@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\MapelAdminController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
@@ -24,6 +25,17 @@ Route::get('/guardian', [GuardianController::class, 'index']);
 Route::get('/classroom', [ClassroomController::class, 'index']);
 Route::get('/teacher', [TeacherController::class, 'index']);
 Route::get('/mapel', [MapelController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])
+    ->middleware('guest')
+    ->name('login');
+
+Route::post('/login', [LoginController::class, 'store'])
+    ->middleware('guest');
+
+Route::post('/logout', [LoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
 
 Route::get('/admin', action: fn() => view('admin.dashboard'));
 

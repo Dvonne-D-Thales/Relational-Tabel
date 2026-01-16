@@ -19,6 +19,7 @@
                             <x-nav-link href="/classroom" :active="request()->is('classroom')">Classroom</x-nav-link>
                             <x-nav-link href="/profil" :active="request()->is('profil')">Profile</x-nav-link>
                             <x-nav-link href="/kontak" :active="request()->is('kontak')">Contact</x-nav-link>
+                            <x-nav-link href="/login" :active="request()->is('login')">Login</x-nav-link>
 
 
 
